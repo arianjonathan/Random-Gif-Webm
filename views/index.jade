@@ -15,6 +15,9 @@ block content
     p(class='info-text') Currently playing: 
       a(href="#{currentVideo}" id="now-playing")
         | #{currentVideo}
+    p(class='info-text') &nbsp;
+    p(class='info-text')
+      a(href='#' onclick='playNext()') Skip
   div(class='video')
     video(controls autoplay name="media" id="current-video")
       source(src="#{currentVideo}" type="video/webm")
