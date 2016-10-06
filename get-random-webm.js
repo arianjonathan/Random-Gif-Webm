@@ -1,18 +1,16 @@
 var request = require('request');
 
-module.exports = 
-    function() {
-        let random = Math.floor(Math.random() * webmList.length);
-        let random2 = Math.floor(Math.random() * webmList[random].length);
-        console.log('Serving no ' + random + ':' + random2 + ' which is ' + webmList[random][random2]);
-        return webmList[random][random2];
-    };
+module.exports = function(exclude) {
+    let random = Math.floor(Math.random() * webmList.length);
+    let random2 = Math.floor(Math.random() * webmList[random].length);
+    console.log('Serving no ' + random + ':' + random2 + ' which is ' + webmList[random][random2]);
+    return webmList[random][random2];
+};
 
-module.exports.runRandomWebmService = 
-    function() {
-        populateWebmList();
-        setInterval(populateWebmList, 1000*60);
-    };
+module.exports.runRandomWebmService = function() {
+    populateWebmList();
+    setInterval(populateWebmList, 1000*60);
+};
 
 var webmList = [[]];
 

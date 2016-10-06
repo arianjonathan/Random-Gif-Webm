@@ -4,7 +4,10 @@ var getRandomWebm = require('../get-random-webm');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.send('<video controls autoplay name="media"><source src="' + getRandomWebm() + '" type="video/webm"></video>');
+  res.render('index', { currentVideo: getRandomWebm(), nextVideo: getRandomWebm() });
+    // let randomWebm = getRandomWebm();
+    // res.send('<video controls autoplay id="current-video" name="media"><source src="' + randomWebm + '" type="video/webm"></video><link rel="prefetch" href="' +
+    //     getRandomWebm(randomWebm) + '" type="video/webm" id="next-video">');
 });
 
 module.exports = router;
