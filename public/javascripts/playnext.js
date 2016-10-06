@@ -3,7 +3,9 @@ $('#current-video').on('ended', (e) => {
     playNext();
 });
 function playNext() {
-    $('source').attr('src', $('#next-video').prop('href'));
+    let nextVideo = $('#next-video').prop('href');
+    $('source').attr('src', nextVideo);
+    $('#now-playing').attr('href', nextVideo).text(nextVideo);
     $('#current-video').trigger('load');
     $.ajax({
         url: '/api',

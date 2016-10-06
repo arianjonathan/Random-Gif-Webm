@@ -1,6 +1,9 @@
 extends layout
 
 block content
+  p Currently playing: 
+    a(href="#{currentVideo}" id="now-playing")
+      | #{currentVideo}
   video(controls autoplay name="media" id="current-video")
     source(src="#{currentVideo}" type="video/webm")
   link(rel="prefetch" href="#{nextVideo}" id="next-video")
