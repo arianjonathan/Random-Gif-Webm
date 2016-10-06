@@ -33,16 +33,15 @@ function populateWebmList () {
                     }
                 }
                 webmList = result;
+                console.log('Webm List finished updating.');
             });
         }
     });
 }
 
 function searchThreadForWebms (threadNumber, callback) {
-    let startTime = Date.now();
     var promise = new Promise((resolve, reject) => {
         let thread = 'https://a.4cdn.org/wsg/thread/' + threadNumber + '.json';
-        console.log('Searching ' + thread);
         request(thread, (error, response, body) => {
             let ret = [];
             if (!error && response.statusCode === 200) {
@@ -53,7 +52,6 @@ function searchThreadForWebms (threadNumber, callback) {
                     }
                 }
             }
-            console.log('Time to complete ' + threadNumber + ': ' + (Date.now() - startTime));
             resolve(ret);
         });
     });
