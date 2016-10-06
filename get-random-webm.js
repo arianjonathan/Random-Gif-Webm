@@ -1,10 +1,14 @@
 var request = require('request');
 
-module.exports = function(exclude) {
+module.exports = function() {
     let random = Math.floor(Math.random() * webmList.length);
     let random2 = Math.floor(Math.random() * webmList[random].length);
-    console.log('Serving no ' + random + ':' + random2 + ' which is ' + webmList[random][random2]);
-    return webmList[random][random2];
+    let ret = webmList[random][random2];
+    if (ret === undefined) {
+        return "/videos/timetostop.webm";
+    }
+    console.log('Serving no ' + random + ':' + random2 + ' which is ' + ret);
+    return ret;
 };
 
 module.exports.runRandomWebmService = function() {

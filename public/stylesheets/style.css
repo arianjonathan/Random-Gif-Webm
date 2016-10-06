@@ -1,6 +1,18 @@
-body {
-  padding: 50px;
+.info-bar {
+  text-align: center;
+}
+
+.info-text {
+  display: inline;
+}
+
+.video {
+  margin: 50px;
+}
+
+#current-video {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  width: 100%;
 }
 
 a {
