@@ -1,14 +1,14 @@
 var request = require('request');
 
 module.exports = function() {
-    let random = Math.floor(Math.random() * webmList.length);
-    if (webmList[random].length === 0) {
+    if (flattenedWebmMap.length === 0) {
         return {fileName: "Something happened!", link: "/videos/timetostop.webm", threadLink: "#"};
     }
-    let random2 = Math.floor(Math.random() * webmList[random].webms.length);
-    let ret = webmList[random].webms[random2];
-    ret.threadLink = webmList[random].threadLink;
-    console.log('Serving no ' + random + ':' + random2 + ' which is ' + ret.link);
+    let randomNum = Math.floor(Math.random() * flattenedWebmMap.length);
+    let random = flattenedWebmMap[randomNum];
+    let ret = webmList[random.x].webms[random.y];
+    ret.threadLink = webmList[random.x].threadLink;
+    console.log('Serving no ' + randomNum + ' which is ' + ret.link);
     return ret;
 };
 
@@ -17,6 +17,7 @@ module.exports.runRandomWebmService = function() {
     setInterval(populateWebmList, 1000*60);
 };
 
+var flattenedWebmMap = [];
 var webmList = [[]];
 
 function populateWebmList () {
@@ -38,6 +39,12 @@ function populateWebmList () {
                     }
                 }
                 webmList = result;
+                flattenedWebmMap = [];
+                for (let i = 0; i < webmList.length; i++) {
+                    for (let j = 0; j < webmList[i].webms.length; j++)  {
+                        flattenedWebmMap.push({x: i, y: j});
+                    }
+                }
                 console.log('Webm List finished updating.');
             });
         }
