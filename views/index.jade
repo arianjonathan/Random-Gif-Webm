@@ -2,25 +2,30 @@ extends layout
 
 block content
   div(class='info-bar')
-    p(class='previous info-text') Previously:&nbsp;
-    a(id='previously3' class='info-text' href='#')
-      |&lt;&lt;&lt;
-    p(class='info-text') &nbsp;
-    a(id='previously2' class='info-text' href='#')
-      |&lt;&lt;
-    p(class='info-text') &nbsp;
-    a(id='previously1' class='info-text' href='#')
-      |&lt;
-    p(class='info-text') &nbsp;
-    p(class='info-text') Currently playing: 
-      a(href="#{currentVideo}" id="now-playing")
-        | #{currentVideo}
-    p(class='info-text') &nbsp;
-    p(class='info-text')
-      a(href='#' onclick='playNext()') Skip
+    span(class='info-group')
+      span Previously:&nbsp;
+        a(id='previously3' href='#')
+          |&lt;&lt;&lt;
+      span &nbsp;
+        a(id='previously2' href='#')
+          |&lt;&lt;
+      span &nbsp;
+        a(id='previously1' href='#')
+          |&lt;
+    span(class='info-group')
+      span(class='info-text') Currently playing: 
+        a(id="now-playing")
+    span(class='info-group')
+      span(class='info-text')
+      a(class='info-text' href='#' onclick='playNext()') Skip
+  div(class='info-bar')
+    span
+    span(class='info-group')
+      span Post link:
+        a(id='post-link')
+    span
   div(class='video')
     video(controls autoplay name="media" id="current-video")
-      source(src="#{currentVideo}" type="video/webm")
-    link(rel="prefetch" href="#{nextVideo}" id="next-video")
+      source(type="video/webm")
+    link(rel="prefetch" id="next-video")
     script(src='/javascripts/playnext.js')
-    

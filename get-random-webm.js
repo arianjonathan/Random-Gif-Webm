@@ -2,12 +2,13 @@ var request = require('request');
 
 module.exports = function() {
     let random = Math.floor(Math.random() * webmList.length);
-    let random2 = Math.floor(Math.random() * webmList[random].length);
-    let ret = webmList[random][random2];
-    if (ret === undefined) {
-        return "/videos/timetostop.webm";
+    if (webmList[random].length === 0) {
+        return {fileName: "Something happened!", link: "/videos/timetostop.webm", threadLink: "#"};
     }
-    console.log('Serving no ' + random + ':' + random2 + ' which is ' + ret);
+    let random2 = Math.floor(Math.random() * webmList[random].webms.length);
+    let ret = webmList[random].webms[random2];
+    ret.threadLink = webmList[random].threadLink;
+    console.log('Serving no ' + random + ':' + random2 + ' which is ' + ret.link);
     return ret;
 };
 
@@ -31,7 +32,7 @@ function populateWebmList () {
             }
             Promise.all(promises).then((result) => {
                 for (let i = 0; i < result.length; i++) {
-                    if (result[i].length === 0) {
+                    if (result[i].webms.length === 0) {
                         result.splice(i, 1);
                         i--;
                     }
@@ -52,11 +53,11 @@ function searchThreadForWebms (threadNumber, callback) {
                 let parsedThread = JSON.parse(body);
                 for (let i = 0; i < parsedThread.posts.length; i++) {
                     if (parsedThread.posts[i].ext === '.webm') {
-                        ret.push('https://i.4cdn.org/wsg/' + parsedThread.posts[i].tim + '.webm');
+                        ret.push({postLink: "http://boards.4chan.org/wsg/thread/" + threadNumber + "#p" + parsedThread.posts[i].no, fileName: parsedThread.posts[i].filename, link: 'https://i.4cdn.org/wsg/' + parsedThread.posts[i].tim + '.webm'});
                     }
                 }
             }
-            resolve(ret);
+            resolve({threadLink: "http://boards.4chan.org/wsg/thread/" + threadNumber, webms: ret});
         });
     });
     return promise;

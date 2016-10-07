@@ -1,8 +1,10 @@
 .info-bar {
-  text-align: center;
+  margin: 0px 50px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.info-text {
+.info-group {
   display: inline;
 }
 
