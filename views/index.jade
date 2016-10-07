@@ -1,31 +1,34 @@
 extends layout
 
 block content
-  div(class='info-bar')
-    span(class='info-group')
-      span Previously:&nbsp;
-        a(id='previously3' href='#')
-          |&lt;&lt;&lt;
-      span &nbsp;
-        a(id='previously2' href='#')
-          |&lt;&lt;
-      span &nbsp;
-        a(id='previously1' href='#')
-          |&lt;
-    span(class='info-group')
-      span(class='info-text') Currently playing: 
-        a(id="now-playing")
-    span(class='info-group')
-      span(class='info-text')
-      a(class='info-text' href='#' onclick='playNext()') Skip
-  div(class='info-bar')
-    span
-    span(class='info-group')
-      span Post link:
-        a(id='post-link')
-    span
-  div(class='video')
-    video(controls autoplay name="media" id="current-video")
-      source(type="video/webm")
-    link(rel="prefetch" id="next-video")
-    script(src='/javascripts/playnext.js')
+  div(class='box')
+    div(class='row header')
+      div(class='info-bar')
+        span(class='info-group')
+          span Previously:&nbsp;
+            a(id='previously3' href='#')
+              |&lt;&lt;&lt;
+          span &nbsp;
+            a(id='previously2' href='#')
+              |&lt;&lt;
+          span &nbsp;
+            a(id='previously1' href='#')
+              |&lt;
+        span(class='info-group')
+          span(class='info-text') Currently playing: 
+            a(id="now-playing")
+        span(class='info-group')
+          span(class='info-text')
+          a(class='info-text' href='#' onclick='playNext()') Skip
+      div(class='info-bar')
+        span
+        span(class='info-group')
+          span Post link:
+            a(id='post-link')
+        span
+    div(class='row content')
+      video(controls autoplay name="media" id="current-video")
+        source(type="video/webm")
+    div(class='row footer')
+  link(rel="prefetch" id="next-video")
+  script(src='/javascripts/playnext.js')

@@ -8,13 +8,36 @@
   display: inline;
 }
 
-.video {
-  margin: 50px;
+html,
+body {
+  height: 100%;
+  margin: 0px;
+}
+
+.box {
+  display: flex;
+  flex-flow: column;
+  height: 100vh;
+}
+
+.box .row.header {
+  flex: 0 1 auto;
+}
+
+.box .row.content {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.box .row.footer {
+  flex: 0 1 0px;
 }
 
 #current-video {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  object-fit: contain;
   width: 100%;
+  height: inherit;
 }
 
 a {
