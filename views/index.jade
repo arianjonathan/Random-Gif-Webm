@@ -21,11 +21,13 @@ block content
           span(class='info-text')
           a(class='info-text' href='#' onclick='playNext()') Skip
       div(class='info-bar')
-        span
+        span(class='info-group')
+          span Thread filter: 
+          input(type='text' id='thread-filter')
+          button(id='thread-filter-button') Apply
         span(class='info-group')
           span Post link:
             a(id='post-link')
-        span
     div(class='row content')
       video(controls autoplay name="media" id="current-video")
         source(type="video/webm")

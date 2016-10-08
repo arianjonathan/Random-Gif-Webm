@@ -4,6 +4,7 @@ $('#current-video').on('ended', (e) => {
 });
 var source = $('source'), nowPlaying = $('#now-playing'), currentVideo = $('#current-video');
 var preloadVideo = $('#next-video'), queue, postLink = $('#post-link');
+var threadFilter = $('#thread-filter');
 var prev1 = $('#previously1'), prev2 = $('#previously2'), prev3 = $('#previously3');
 function playNext() {
     prev3.attr('href', prev2.prop('href'));
@@ -23,7 +24,10 @@ function getWebm() {
     var p = new Promise((resolve, reject) => {
         $.ajax({
             url: '/api',
-            dataType: 'json'
+            dataType: 'json',
+            data: {
+                thread: window.btoa(threadFilter.val())
+            }
         }).done((data) => {
             resolve(data);
         });
@@ -39,8 +43,23 @@ $(document).keyup((e) => {
         playNext();
     }
 });
+threadFilter.keyup((e) => {
+    if (e.keyCode === 13) {
+        applyThreadFilter();
+    }
+});
+$('#thread-filter-button').click((e) => {
+    applyThreadFilter();
+});
+function applyThreadFilter() {
+    getWebm()
+        .then(data => setCurrentVideo(data));
+    getWebm()
+        .then(data => queueVideo(data));
+}
 getWebm()
     .then(data => setCurrentVideo(data));
 getWebm()
     .then(data => queueVideo(data));
+
 console.log('Playnext initiated.');

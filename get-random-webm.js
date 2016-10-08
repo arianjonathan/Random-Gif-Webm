@@ -1,14 +1,27 @@
 var request = require('request');
 
-module.exports = function() {
+module.exports = function(threadNumber) {
     if (flattenedWebmMap.length === 0) {
         return {fileName: "Something happened!", link: "/videos/timetostop.webm", threadLink: "#"};
     }
-    let randomNum = Math.floor(Math.random() * flattenedWebmMap.length);
-    let random = flattenedWebmMap[randomNum];
-    let ret = webmList[random.x].webms[random.y];
-    ret.threadLink = webmList[random.x].threadLink;
-    console.log('Serving no ' + randomNum + ' which is ' + ret.link);
+    let x, y;
+    if (threadNumber) {
+        for (let i = 0; i < webmList.length; i++) {
+            if (webmList[i].threadNumber === threadNumber) {
+                x = i;
+                y = Math.floor(Math.random() * webmList[i].webms.length);
+            }
+        }
+    }
+    else {
+        let randomNum = Math.floor(Math.random() * flattenedWebmMap.length);
+        let random = flattenedWebmMap[randomNum];
+        x = random.x;
+        y = random.y;
+    }
+    let ret = webmList[x].webms[y];
+    ret.threadLink = webmList[x].threadLink;
+    console.log('Serving no ' + x + ':' + y + ' which is ' + ret.link);
     return ret;
 };
 
@@ -64,7 +77,7 @@ function searchThreadForWebms (threadNumber, callback) {
                     }
                 }
             }
-            resolve({threadLink: "http://boards.4chan.org/wsg/thread/" + threadNumber, webms: ret});
+            resolve({threadNumber: threadNumber, webms: ret});
         });
     });
     return promise;
