@@ -22,13 +22,16 @@ function setCurrentVideo(video) {
 }
 function getWebm() {
     var p = new Promise((resolve, reject) => {
-        $.ajax({
+        let ajaxRequest = {
             url: '/api',
             dataType: 'json',
-            data: {
-                thread: window.btoa(threadFilter.val())
-            }
-        }).done((data) => {
+            data: {}
+        }
+        if (threadFilter.val() !== "") {
+            ajaxRequest.data.thread = window.btoa(threadFilter.val());
+        }
+        $.ajax(ajaxRequest)
+        .done((data) => {
             resolve(data);
         });
     });
