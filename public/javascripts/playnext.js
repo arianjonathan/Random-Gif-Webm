@@ -66,11 +66,13 @@ $('#thread-filter-button').click((e) => {
     applyThreadFilter();
 });
 function applyThreadFilter() {
-    noShuffleIndex = 0;
-    getWebm()
-        .then(data => setCurrentVideo(data));
-    getWebm(true)
-        .then(data => queueVideo(data));
+    let jqparam = {};    
+    if (threadFilter.prop('value') !== "") {
+        jqparam.threadFilter = window.btoa(threadFilter.prop('value'));
+        jqparam.shuffle = shuffle.prop('checked');
+    }
+    document.location.search = $.param(jqparam);
+    return;
 }
 getWebm()
     .then(data => setCurrentVideo(data));
