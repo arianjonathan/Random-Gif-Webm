@@ -14,6 +14,10 @@ body {
   margin: 0px;
 }
 
+body {
+  background-color: rgb(238, 242, 255);
+}
+
 .box {
   display: flex;
   flex-flow: column;

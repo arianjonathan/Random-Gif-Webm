@@ -1,6 +1,6 @@
 var request = require('request');
 
-module.exports = function(threadNumber) {
+module.exports = function(threadNumber, index) {
     if (flattenedWebmMap.length === 0) {
         return {fileName: "Something happened!", link: "/videos/timetostop.webm", threadLink: "#"};
     }
@@ -9,7 +9,9 @@ module.exports = function(threadNumber) {
         for (let i = 0; i < webmList.length; i++) {
             if (webmList[i].threadNumber === threadNumber) {
                 x = i;
-                y = Math.floor(Math.random() * webmList[i].webms.length);
+                y = (index !== -1) ?
+                    index % webmList[i].webms.length :
+                    Math.floor(Math.random() * webmList[i].webms.length);
             }
         }
     }

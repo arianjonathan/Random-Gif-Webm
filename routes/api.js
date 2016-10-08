@@ -10,7 +10,7 @@ router.get('/', function (req, res, next) {
             let regexMatched = /thread\/(\d+)/g.exec(b64decoded);
             let threadNumber = parseInt(regexMatched[1]);
             console.log('Thread: ' + threadNumber);
-            res.send(getRandomWebm(threadNumber));
+            res.send(getRandomWebm(threadNumber, req.query.index ? req.query.index : -1));
             return;
         }
         catch (ex) {}

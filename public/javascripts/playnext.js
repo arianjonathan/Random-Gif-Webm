@@ -4,7 +4,7 @@ $('#current-video').on('ended', (e) => {
 });
 var source = $('source'), nowPlaying = $('#now-playing'), currentVideo = $('#current-video');
 var preloadVideo = $('#next-video'), queue, postLink = $('#post-link');
-var threadFilter = $('#thread-filter');
+var threadFilter = $('#thread-filter'), shuffle = $('#thread-filter-shuffle');
 var prev1 = $('#previously1'), prev2 = $('#previously2'), prev3 = $('#previously3');
 function playNext() {
     prev3.attr('href', prev2.prop('href'));
@@ -20,15 +20,23 @@ function setCurrentVideo(video) {
     currentVideo.trigger('load');
     postLink.attr('href', video.postLink).text(video.postLink);
 }
+var noShuffleIndex = 0;
 function getWebm() {
     var p = new Promise((resolve, reject) => {
         let ajaxRequest = {
             url: '/api',
             dataType: 'json',
             data: {}
-        }
+        };
         if (threadFilter.val() !== "") {
             ajaxRequest.data.thread = window.btoa(threadFilter.val());
+            if (!shuffle.prop('checked')) {
+                ajaxRequest.data.index = noShuffleIndex;
+                noShuffleIndex++;
+            }
+            else {
+                ajaxRequest.data.index = -1;
+            }
         }
         $.ajax(ajaxRequest)
         .done((data) => {
@@ -55,9 +63,10 @@ $('#thread-filter-button').click((e) => {
     applyThreadFilter();
 });
 function applyThreadFilter() {
+    noShuffleIndex = 0;
     getWebm()
         .then(data => setCurrentVideo(data));
-    getWebm()
+    getWebm(true)
         .then(data => queueVideo(data));
 }
 getWebm()
