@@ -29,14 +29,17 @@ function getWebm() {
             data: {}
         };
         if (threadFilter.val() !== "") {
-            ajaxRequest.data.thread = window.btoa(threadFilter.val());
-            if (!shuffle.prop('checked')) {
-                ajaxRequest.data.index = noShuffleIndex;
-                noShuffleIndex++;
+            try {
+                ajaxRequest.data.thread = window.btoa(threadFilter.val());
+                if (!shuffle.prop('checked')) {
+                    ajaxRequest.data.index = noShuffleIndex;
+                    noShuffleIndex++;
+                }
+                else {
+                    ajaxRequest.data.index = -1;
+                }
             }
-            else {
-                ajaxRequest.data.index = -1;
-            }
+            catch (ex) {}
         }
         $.ajax(ajaxRequest)
         .done((data) => {

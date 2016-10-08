@@ -19,14 +19,14 @@ block content
             a(id="now-playing")
         span(class='info-group')
           span(class='info-text')
-          a(class='info-text' href='#' onclick='playNext()') Skip
+          a(class='info-text' href='javascript:void(0)' onclick='playNext()') Skip
       div(class='info-bar')
         span(class='info-group')
           span Thread filter: 
-          input(type='text' id='thread-filter')
+          input(type='text' id='thread-filter' value="#{threadFilter}")
           button(id='thread-filter-button') Apply
           span &nbsp;Shuffle
-          input(type='checkbox' id='thread-filter-shuffle' checked)
+          input(type='checkbox' id='thread-filter-shuffle' checked=shuffle)
         span(class='info-group')
           span Post link:
             a(id='post-link')
