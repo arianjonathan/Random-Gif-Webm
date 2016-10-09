@@ -4,6 +4,7 @@ module.exports = function(threadNumber, index) {
     if (flattenedWebmMap.length === 0) {
         return {fileName: "Something happened!", link: "/videos/timetostop.webm", threadLink: "#"};
     }
+    "use strict";
     let x, y;
     if (threadNumber) {
         for (let i = 0; i < webmList.length; i++) {
