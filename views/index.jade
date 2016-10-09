@@ -6,13 +6,13 @@ block content
       div(class='info-bar')
         span(class='info-group')
           span Previously:&nbsp;
-            a(id='previously3' href='#')
+            a(id='previously3' href='javascript:void(0)')
               |&lt;&lt;&lt;
           span &nbsp;
-            a(id='previously2' href='#')
+            a(id='previously2' href='javascript:void(0)')
               |&lt;&lt;
           span &nbsp;
-            a(id='previously1' href='#')
+            a(id='previously1' href='javascript:void(0)')
               |&lt;
         span(class='info-group')
           span(class='info-text') Currently playing: 
@@ -23,10 +23,10 @@ block content
       div(class='info-bar')
         span(class='info-group')
           span Thread filter: 
-          input(type='text' id='thread-filter' value="#{threadFilter}")
+          input(type='text' id='thread-filter' value="#{threadFilter}" autocomplete="off")
           button(id='thread-filter-button') Apply
           span &nbsp;Shuffle
-          input(type='checkbox' id='thread-filter-shuffle' checked=shuffle)
+          input(type='checkbox' id='thread-filter-shuffle' checked=shuffle autocomplete="off")
         span(class='info-group')
           span Post link:
             a(id='post-link')
