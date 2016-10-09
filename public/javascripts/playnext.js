@@ -1,4 +1,6 @@
-$('#current-video').on('ended', (e) => {
+'use strict';
+
+$('#current-video').on('ended', function(e) {
     console.log('Ended. Now playing: ' + $('#next-video').prop('href'));
     playNext();
 });
@@ -12,7 +14,7 @@ function playNext() {
     prev1.attr('href', source.prop('src'));
     setCurrentVideo(queue);
     getWebm()
-        .then(data => queueVideo(data));
+        .then(function(data) {queueVideo(data);});
 }
 function setCurrentVideo(video) {
     source.attr('src', video.link);
@@ -22,7 +24,7 @@ function setCurrentVideo(video) {
 }
 var noShuffleIndex = 0;
 function getWebm() {
-    var p = new Promise((resolve, reject) => {
+    var p = new Promise(function(resolve, reject) {
         let ajaxRequest = {
             url: '/api',
             dataType: 'json',
@@ -42,7 +44,7 @@ function getWebm() {
             catch (ex) {}
         }
         $.ajax(ajaxRequest)
-        .done((data) => {
+        .done(function(data) {
             resolve(data);
         });
     });
@@ -52,21 +54,25 @@ function queueVideo(video) {
     preloadVideo.attr('href', video.link);
     queue = video;
 }
-$(document).keyup((e) => {
+$(document).keyup(function(e) {
     if (e.key === ' ') {
         playNext();
     }
 });
-threadFilter.keyup((e) => {
+threadFilter.keyup(function(e) {
     if (e.keyCode === 13) {
         applyThreadFilter();
     }
 });
-$('#thread-filter-button').click((e) => {
+$('#thread-filter-button').click(function(e) {
     applyThreadFilter();
 });
+var hammertime = new Hammer(document);
+hammertime.on('swipeleft', function(e) {
+    playNext();
+});
 function applyThreadFilter() {
-    let jqparam = {};    
+    let jqparam = {};
     if (threadFilter.prop('value') !== "") {
         jqparam.threadFilter = window.btoa(threadFilter.prop('value'));
         jqparam.shuffle = shuffle.prop('checked');
@@ -75,8 +81,8 @@ function applyThreadFilter() {
     return;
 }
 getWebm()
-    .then(data => setCurrentVideo(data));
+    .then(function(data) {setCurrentVideo(data);});
 getWebm()
-    .then(data => queueVideo(data));
+    .then(function(data) {queueVideo(data);});
 
 console.log('Playnext initiated.');
