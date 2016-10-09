@@ -68,14 +68,14 @@ function populateWebmList () {
 
 function searchThreadForWebms (threadNumber, callback) {
     var promise = new Promise((resolve, reject) => {
-        let thread = 'https://a.4cdn.org/wsg/thread/' + threadNumber + '.json';
+        let thread = 'https://a.4cdn.org/gif/thread/' + threadNumber + '.json';
         request(thread, (error, response, body) => {
             let ret = [];
             if (!error && response.statusCode === 200) {
                 let parsedThread = JSON.parse(body);
                 for (let i = 0; i < parsedThread.posts.length; i++) {
                     if (parsedThread.posts[i].ext === '.webm') {
-                        ret.push({postLink: "http://boards.4chan.org/wsg/thread/" + threadNumber + "#p" + parsedThread.posts[i].no, fileName: parsedThread.posts[i].filename, link: 'https://i.4cdn.org/wsg/' + parsedThread.posts[i].tim + '.webm'});
+                        ret.push({postLink: "http://boards.4chan.org/gif/thread/" + threadNumber + "#p" + parsedThread.posts[i].no, fileName: parsedThread.posts[i].filename, link: 'https://i.4cdn.org/gif/' + parsedThread.posts[i].tim + '.webm'});
                     }
                 }
             }
