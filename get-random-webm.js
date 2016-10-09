@@ -36,7 +36,7 @@ var flattenedWebmMap = [];
 var webmList = [[]];
 
 function populateWebmList () {
-    request('https://a.4cdn.org/wsg/catalog.json', (error, response, body) => {
+    request('https://a.4cdn.org/gif/catalog.json', (error, response, body) => {
         if (!error && response.statusCode === 200) {
             let parsed = JSON.parse(body);
             let promises = [];
