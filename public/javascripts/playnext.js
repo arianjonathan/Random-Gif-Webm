@@ -67,8 +67,7 @@ threadFilter.keyup(function(e) {
 $('#thread-filter-button').click(function(e) {
     applyThreadFilter();
 });
-var hammertime = new Hammer(document);
-hammertime.on('swipeleft', function(e) {
+currentVideo.hammer().on('swipeleft', function(e) {
     playNext();
 });
 function applyThreadFilter() {
