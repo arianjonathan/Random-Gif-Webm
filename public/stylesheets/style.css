@@ -40,8 +40,9 @@ body {
 #current-video {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   object-fit: contain;
-  width: 100%;
-  height: inherit;
+  height: 95vh;
+  display: block;
+  margin: 0 auto;
 }
 
 a {
